@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:calls="clr-namespace:ChatAppMAUI.ViewModel"
+             x:Class="ChatAppMAUI.View.Calls"
+             Title="Calls">
+    <ContentPage.BindingContext>
+        <calls:CallsViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ScrollView >
+        <VerticalStackLayout>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding CallsCollection}" BackgroundColor="White" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ProfileImage}" HeightRequest="50" WidthRequest="50" Aspect="AspectFill" Grid.Column="0" />
+
+                                <StackLayout Grid.Column="1" Padding="10,0">
+                                    <Label Text="{Binding Name}" FontSize="18" TextColor="Black" />
+                                    <Label Text="{Binding Timestamp}" FontSize="12" TextColor="Gray" Grid.Column="2" VerticalOptions="Center" />
+                                </StackLayout>
+
+                                <Image Source="{Binding CallImage}" HeightRequest="30" WidthRequest="30" Aspect="AspectFill" Grid.Column="3" />
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

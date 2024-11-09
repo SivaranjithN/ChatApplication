@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatAppMAUI.View.WhatsApp"
+             xmlns:local="clr-namespace:ChatAppMAUI.ViewModel"
+             Title="WhatsApp">
+
+    <ContentPage.BindingContext>
+        <local:ChatViewModel/>
+    </ContentPage.BindingContext>
+    
+    
+    <Grid RowDefinitions="Auto, *" BackgroundColor="#075E54">
+
+        <!-- Top Navigation Bar -->
+        <Grid Padding="10" RowDefinitions="Auto, Auto" BackgroundColor="#075E54">
+            <!-- Title and Icons -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="WhatsApp" FontSize="24" VerticalOptions="Center" TextColor="White" />
+
+            <!-- Search and Menu Icons -->
+            <Image Source="dotnet_bot.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0" WidthRequest="80" />
+            <Image Source="dotnet_bot.png" Grid.Column="2" VerticalOptions="Center" Margin="10,0" WidthRequest="80"/>
+
+            <!-- Tabs -->
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="CHATS" TextColor="White" Margin="10,0" />
+                <Label Text="STATUS" TextColor="White" Margin="10,0" />
+                <Label Text="CALLS" TextColor="White" Margin="10,0" />
+            </StackLayout>
+        </Grid>
+
+        <!-- Chats List -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Chats}" BackgroundColor="White" SelectionMode="Single"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Profile Image -->
+                        <Image Source="{Binding ProfileImage}" HeightRequest="50" WidthRequest="50" Aspect="AspectFill" Grid.Column="0" />
+
+                        <!-- Name and Message -->
+                        <StackLayout Grid.Column="1" Padding="10,0">
+                            <Label Text="{Binding Name}" FontSize="18" TextColor="Black" />
+                            <Label Text="{Binding Message}" FontSize="14" TextColor="Gray" />
+                        </StackLayout>
+
+                        <!-- Timestamp -->
+                        <Label Text="{Binding Timestamp}" FontSize="12" TextColor="Gray" Grid.Column="2" VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

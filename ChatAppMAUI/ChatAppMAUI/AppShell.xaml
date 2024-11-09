@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ChatAppMAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ChatAppMAUI.View"
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="ChatAppMAUI">
+
+    
+    <Shell.ToolbarItems Shell.TabBarBackgroundColor="#075E54">
+        <ToolbarItem IconImageSource="search.png"                   
+                     Order="Primary"
+                     Priority="0"
+                     Clicked="ToolbarItem_Clicked_1"
+                     />
+        <ToolbarItem IconImageSource="message.png"                    
+                     Order="Primary"
+                     Priority="0"
+                     />
+        <ToolbarItem IconImageSource="threedot.png" Clicked="ToolbarItem_Clicked"                    
+                     Order="Primary"
+                     Priority="0"
+                     />
+    </Shell.ToolbarItems>
+    
+    <Shell.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ChatsTemplate" xmlns:views="clr-namespace:ChatAppMAUI.View">
+                <views:Chats />
+            </DataTemplate>
+            <DataTemplate x:Key="StatusTemplate" xmlns:views="clr-namespace:ChatAppMAUI.View">
+                <views:Status />
+            </DataTemplate>
+            <DataTemplate x:Key="CallsTemplate" xmlns:views="clr-namespace:ChatAppMAUI.View">
+                <views:Calls />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!-- In your main XAML -->
+    <TabBar 
+            Title="WhatsApp" 
+            Shell.TabBarTitleColor="White"
+            Shell.TabBarUnselectedColor="White"
+            Shell.TabBarBackgroundColor="#075E54">
+
+        <Tab Title="Chats" Icon="people_circle.png" 
+             FlexLayout.AlignSelf="Stretch"
+             Shell.TabBarIsVisible="True">
+            <ShellContent>
+                <ContentPage>
+                    <VerticalStackLayout>
+                        <!-- SearchBar (Initially Hidden) -->
+                        <SearchBar x:Name="SearchBarControl" Background="White" 
+                                   Placeholder="Search..."
+                                   IsVisible="False"
+                                   Margin="10"
+                                   VerticalOptions="Start" />
+
+                        <!-- Main Chat Content -->
+                        <local:Chats />
+                    </VerticalStackLayout>
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="Status" Icon="status_icon.png" 
+             FlexLayout.AlignSelf="Stretch">
+            <ShellContent ContentTemplate="{StaticResource StatusTemplate}" />
+        </Tab>
+
+        <Tab Title="Calls" Icon="calls_icon.png"
+             FlexLayout.AlignSelf="Stretch">
+            <ShellContent ContentTemplate="{StaticResource CallsTemplate}" />
+        </Tab>
+
+    </TabBar>
+
+</Shell>
